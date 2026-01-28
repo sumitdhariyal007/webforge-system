@@ -1,0 +1,1585 @@
+{
+  "meta": {
+    "version": "3.0",
+    "scope": "Website Builder + SEO + AEO + GEO + Brand + UX + CRO + AI-Readiness + Security + Performance",
+    "usage": "TWO MODES: (1) FRESH BUILD: Give domain + category + credentials → AI builds complete website, uploads, and configures everything. (2) AUDIT MODE: Give existing URL → AI runs full 360 audit + auto-fix.",
+    "status_keys": ["done", "missing", "partial", "over_optimized", "not_applicable"],
+    "priority_keys": ["critical", "high", "medium", "low"],
+    "created": "2026-01-28",
+    "updated": "2026-01-28",
+    "author": "LeadHorizon AI Audit System"
+  },
+
+  "0_website_builder_system": {
+    "label": "AI Website Builder System",
+    "description": "Complete system to build a production-ready website from scratch. User provides: domain, business category, and hosting credentials. AI builds everything.",
+
+    "intake_form": {
+      "description": "Questions AI must ask user before building",
+      "required_inputs": {
+        "domain": {"question": "Domain name kya hai?", "example": "leadhorizon.co.in"},
+        "category": {"question": "Business category kya hai?", "example": "real_estate_agency", "allowed_values": "See category_templates below"},
+        "business_name": {"question": "Business ka naam kya hai?", "example": "LeadHorizon"},
+        "tagline": {"question": "Tagline ya one-liner?", "example": "Data-Driven Growth for Real Estate Developers"},
+        "phone": {"question": "Phone number?", "example": "+91-7011066532"},
+        "email": {"question": "Business email?", "example": "info@leadhorizon.co.in"},
+        "whatsapp": {"question": "WhatsApp number?", "example": "+917011066532"},
+        "location": {"question": "Business location?", "example": "Delhi NCR, India"},
+        "hosting_type": {"question": "Hosting access kaise dena hai?", "allowed_values": ["ssh", "ftp", "cpanel"]},
+        "hosting_credentials": {"question": "SSH/FTP credentials? (hostname, port, username)", "example": "ssh -p 65002 user@ip"}
+      },
+      "optional_inputs": {
+        "logo_path": {"question": "Logo file ka path? (ya AI generate kare?)", "default": "AI will create SVG logo"},
+        "brand_colors": {"question": "Brand colors? (primary, secondary)", "default": "AI picks based on category"},
+        "services": {"question": "Services list do (comma separated)", "default": "AI generates based on category"},
+        "target_audience": {"question": "Target audience kaun hai?", "default": "AI infers from category"},
+        "competitors": {"question": "Competitor websites (for inspiration)?", "default": "none"},
+        "social_links": {"question": "Social media URLs?", "default": "empty"},
+        "google_analytics_id": {"question": "GA4 Measurement ID?", "default": "skip"},
+        "gtm_id": {"question": "GTM Container ID?", "default": "skip"}
+      }
+    },
+
+    "category_templates": {
+      "description": "Pre-built configurations per business category. AI uses these to generate page structure, content tone, color scheme, sections, CTAs, schema type, and keywords.",
+
+      "real_estate_agency": {
+        "label": "Real Estate Marketing Agency",
+        "color_scheme": {"primary": "#800000", "secondary": "#D4AF37", "dark": "#1a1a2e"},
+        "font_pair": {"heading": "Montserrat", "body": "Poppins"},
+        "sections": ["hero", "stats", "client_logos", "process", "services", "projects", "testimonials", "case_studies", "about", "cta", "blog", "faq", "contact_form", "footer"],
+        "cta_text": ["Get Free Audit", "Book Strategy Call", "Start Lead Generation"],
+        "trust_signals": ["leads_per_day", "conversion_rate", "projects_delivered", "google_rating"],
+        "schema_types": ["LocalBusiness", "Organization", "FAQPage", "BreadcrumbList"],
+        "target_keywords": ["real estate marketing", "lead generation", "digital marketing for builders", "real estate SEO"],
+        "tone": "professional, data-driven, results-focused"
+      },
+
+      "real_estate_project": {
+        "label": "Real Estate Project / Property Landing Page",
+        "color_scheme": {"primary": "#1a3a5c", "secondary": "#c9a96e", "dark": "#0d1b2a"},
+        "font_pair": {"heading": "Playfair Display", "body": "Open Sans"},
+        "sections": ["hero_with_video", "project_highlights", "floor_plans", "amenities", "gallery", "location_map", "price_table", "developer_info", "testimonials", "lead_form", "faq", "footer"],
+        "cta_text": ["Download Brochure", "Book Site Visit", "Get Price List", "Talk to Expert"],
+        "trust_signals": ["rera_number", "developer_name", "possession_date", "units_available"],
+        "schema_types": ["RealEstateAgent", "Product", "FAQPage", "BreadcrumbList"],
+        "target_keywords": ["[project_name]", "[location] apartments", "[location] flats", "buy flat in [location]"],
+        "tone": "luxurious, aspirational, trust-building"
+      },
+
+      "digital_marketing_agency": {
+        "label": "Digital Marketing Agency",
+        "color_scheme": {"primary": "#6C63FF", "secondary": "#FF6584", "dark": "#1a1a2e"},
+        "font_pair": {"heading": "Inter", "body": "DM Sans"},
+        "sections": ["hero", "stats", "services", "process", "portfolio", "testimonials", "case_studies", "team", "blog", "cta", "faq", "contact", "footer"],
+        "cta_text": ["Get Free Proposal", "Start Your Project", "Book a Call"],
+        "trust_signals": ["clients_served", "campaigns_launched", "revenue_generated", "google_partner"],
+        "schema_types": ["Organization", "ProfessionalService", "FAQPage", "BreadcrumbList"],
+        "target_keywords": ["digital marketing agency", "SEO services", "PPC management", "social media marketing"],
+        "tone": "creative, innovative, results-oriented"
+      },
+
+      "restaurant_cafe": {
+        "label": "Restaurant / Cafe / Food Business",
+        "color_scheme": {"primary": "#D4451A", "secondary": "#F5A623", "dark": "#2C1810"},
+        "font_pair": {"heading": "Playfair Display", "body": "Lato"},
+        "sections": ["hero_with_food_image", "about_story", "menu_highlights", "special_offers", "gallery", "reviews", "chef_section", "reservation_form", "location_hours", "footer"],
+        "cta_text": ["Book a Table", "Order Online", "View Menu", "Call Now"],
+        "trust_signals": ["google_rating", "years_in_business", "dishes_served", "zomato_rating"],
+        "schema_types": ["Restaurant", "Menu", "FAQPage", "BreadcrumbList", "LocalBusiness"],
+        "target_keywords": ["[cuisine] restaurant [location]", "best [cuisine] near me", "restaurant in [location]"],
+        "tone": "warm, inviting, appetizing"
+      },
+
+      "doctor_clinic": {
+        "label": "Doctor / Clinic / Healthcare",
+        "color_scheme": {"primary": "#0077B6", "secondary": "#00B4D8", "dark": "#023E8A"},
+        "font_pair": {"heading": "Nunito Sans", "body": "Source Sans Pro"},
+        "sections": ["hero", "doctor_profile", "services", "conditions_treated", "patient_testimonials", "certifications", "appointment_form", "clinic_photos", "insurance_accepted", "location_hours", "faq", "footer"],
+        "cta_text": ["Book Appointment", "Call Now", "Consult Online", "Get Directions"],
+        "trust_signals": ["years_experience", "patients_treated", "success_rate", "certifications"],
+        "schema_types": ["Physician", "MedicalClinic", "MedicalBusiness", "FAQPage", "BreadcrumbList"],
+        "target_keywords": ["[specialty] doctor [location]", "best [specialty] near me", "[condition] treatment [location]"],
+        "tone": "trustworthy, caring, professional, empathetic"
+      },
+
+      "lawyer_legal": {
+        "label": "Lawyer / Law Firm / Legal Services",
+        "color_scheme": {"primary": "#1B2A4A", "secondary": "#B8860B", "dark": "#0A1628"},
+        "font_pair": {"heading": "Merriweather", "body": "Source Sans Pro"},
+        "sections": ["hero", "practice_areas", "attorney_profiles", "case_results", "testimonials", "process_steps", "free_consultation_form", "awards", "faq", "blog", "footer"],
+        "cta_text": ["Free Consultation", "Call Now", "Discuss Your Case", "Get Legal Help"],
+        "trust_signals": ["cases_won", "years_experience", "bar_associations", "client_satisfaction"],
+        "schema_types": ["Attorney", "LegalService", "FAQPage", "BreadcrumbList"],
+        "target_keywords": ["[practice_area] lawyer [location]", "best advocate [location]", "[practice_area] attorney near me"],
+        "tone": "authoritative, trustworthy, confident, reassuring"
+      },
+
+      "ecommerce_store": {
+        "label": "E-commerce / Online Store",
+        "color_scheme": {"primary": "#FF6B00", "secondary": "#00C853", "dark": "#1a1a1a"},
+        "font_pair": {"heading": "Outfit", "body": "Inter"},
+        "sections": ["hero_with_offer", "featured_products", "categories", "bestsellers", "why_choose_us", "customer_reviews", "newsletter_signup", "shipping_info", "faq", "footer"],
+        "cta_text": ["Shop Now", "Add to Cart", "Get 10% Off", "View Products"],
+        "trust_signals": ["products_sold", "happy_customers", "fast_delivery", "easy_returns"],
+        "schema_types": ["Organization", "Product", "BreadcrumbList", "FAQPage"],
+        "target_keywords": ["buy [product] online", "[product] price", "best [product] India", "[brand] store"],
+        "tone": "energetic, deal-focused, customer-friendly"
+      },
+
+      "saas_startup": {
+        "label": "SaaS / Software / Tech Startup",
+        "color_scheme": {"primary": "#5B5EA6", "secondary": "#9B59B6", "dark": "#1a1a2e"},
+        "font_pair": {"heading": "Space Grotesk", "body": "Inter"},
+        "sections": ["hero_with_demo", "features", "how_it_works", "pricing_table", "integrations", "testimonials", "case_studies", "faq", "cta", "footer"],
+        "cta_text": ["Start Free Trial", "Book Demo", "Get Started", "See Pricing"],
+        "trust_signals": ["active_users", "uptime_percentage", "companies_using", "g2_rating"],
+        "schema_types": ["SoftwareApplication", "Organization", "FAQPage", "BreadcrumbList"],
+        "target_keywords": ["[product_type] software", "[product_type] tool", "best [product_type] for [audience]"],
+        "tone": "modern, clean, technical yet accessible"
+      },
+
+      "education_coaching": {
+        "label": "Education / Coaching Institute / Online Course",
+        "color_scheme": {"primary": "#2E86AB", "secondary": "#F18F01", "dark": "#1B1B3A"},
+        "font_pair": {"heading": "Raleway", "body": "Nunito"},
+        "sections": ["hero", "courses", "results_stats", "faculty", "toppers", "testimonials", "study_material", "demo_class_form", "gallery", "faq", "footer"],
+        "cta_text": ["Enroll Now", "Book Free Demo", "Download Syllabus", "Talk to Counselor"],
+        "trust_signals": ["students_enrolled", "selection_rate", "years_teaching", "toppers_count"],
+        "schema_types": ["EducationalOrganization", "Course", "FAQPage", "BreadcrumbList"],
+        "target_keywords": ["[subject] coaching [location]", "best [exam] preparation", "[course] classes near me"],
+        "tone": "motivating, result-oriented, academic, encouraging"
+      },
+
+      "gym_fitness": {
+        "label": "Gym / Fitness Center / Yoga Studio",
+        "color_scheme": {"primary": "#E63946", "secondary": "#F1FAEE", "dark": "#1D3557"},
+        "font_pair": {"heading": "Bebas Neue", "body": "Roboto"},
+        "sections": ["hero_with_video", "programs", "trainers", "transformation_gallery", "membership_plans", "schedule", "testimonials", "free_trial_form", "facilities", "faq", "footer"],
+        "cta_text": ["Start Free Trial", "Join Now", "Get Membership", "Book a Session"],
+        "trust_signals": ["members_active", "transformations", "trainers_certified", "years_running"],
+        "schema_types": ["SportsActivityLocation", "LocalBusiness", "FAQPage", "BreadcrumbList"],
+        "target_keywords": ["gym near me", "fitness center [location]", "personal trainer [location]", "yoga classes [location]"],
+        "tone": "energetic, motivating, bold, action-driven"
+      },
+
+      "hotel_hospitality": {
+        "label": "Hotel / Resort / Hospitality",
+        "color_scheme": {"primary": "#2C3E50", "secondary": "#C9B037", "dark": "#1a1a2e"},
+        "font_pair": {"heading": "Cormorant Garamond", "body": "Montserrat"},
+        "sections": ["hero_fullscreen", "rooms_suites", "amenities", "dining", "gallery", "virtual_tour", "guest_reviews", "special_offers", "location_attractions", "booking_form", "faq", "footer"],
+        "cta_text": ["Book Now", "Check Availability", "View Rooms", "Special Offers"],
+        "trust_signals": ["tripadvisor_rating", "years_hospitality", "guests_hosted", "awards"],
+        "schema_types": ["Hotel", "LodgingBusiness", "FAQPage", "BreadcrumbList"],
+        "target_keywords": ["hotel in [location]", "best resort [location]", "[location] accommodation", "luxury hotel [location]"],
+        "tone": "elegant, luxurious, welcoming, serene"
+      },
+
+      "wedding_events": {
+        "label": "Wedding Planner / Event Management",
+        "color_scheme": {"primary": "#B76E79", "secondary": "#F0E6D3", "dark": "#2C2C2C"},
+        "font_pair": {"heading": "Great Vibes", "body": "Lato"},
+        "sections": ["hero_with_slideshow", "services", "portfolio_gallery", "packages_pricing", "process_timeline", "vendor_partners", "testimonials", "blog", "inquiry_form", "faq", "footer"],
+        "cta_text": ["Plan My Wedding", "Get Quote", "View Portfolio", "Book Consultation"],
+        "trust_signals": ["events_managed", "happy_couples", "years_experience", "vendor_network"],
+        "schema_types": ["EventPlanner", "LocalBusiness", "FAQPage", "BreadcrumbList"],
+        "target_keywords": ["wedding planner [location]", "event management [location]", "destination wedding planner"],
+        "tone": "romantic, elegant, celebratory, personal"
+      },
+
+      "custom": {
+        "label": "Custom / Other Business",
+        "color_scheme": {"primary": "ask_user", "secondary": "ask_user", "dark": "#1a1a2e"},
+        "font_pair": {"heading": "ask_user", "body": "ask_user"},
+        "sections": ["hero", "about", "services", "portfolio", "testimonials", "cta", "contact", "faq", "footer"],
+        "cta_text": ["ask_user"],
+        "trust_signals": ["ask_user"],
+        "schema_types": ["Organization", "LocalBusiness", "FAQPage", "BreadcrumbList"],
+        "target_keywords": ["ask_user"],
+        "tone": "ask_user"
+      }
+    },
+
+    "file_structure": {
+      "description": "Files AI will generate for every website",
+      "files": {
+        "index.html": "Main landing page with all sections, meta tags, schema, OG tags",
+        "style.css": "Complete responsive CSS with animations, mobile-first design",
+        "script.js": "Counter animations, mobile menu, scroll effects, form validation, modals, exit intent, cookie consent",
+        "contact.html": "Contact page with form, map, phone, email, WhatsApp",
+        "blog.html": "Blog listing page with featured post + grid",
+        "blog/post-1.html": "First blog post (SEO-optimized, 1500+ words, Article schema)",
+        "blog/post-2.html": "Second blog post",
+        "blog/post-3.html": "Third blog post",
+        "blog/post-4.html": "Fourth blog post",
+        "privacy-policy.html": "Auto-generated privacy policy customized for business",
+        "terms.html": "Auto-generated terms of service",
+        "faq.html": "FAQ page with FAQPage schema (5-10 Q&As based on category)",
+        "thankyou.html": "Thank you page for form conversion tracking",
+        "404.html": "Custom 404 page with navigation back to homepage",
+        "sitemap.xml": "XML sitemap with all pages, lastmod, priority, changefreq",
+        "robots.txt": "robots.txt with sitemap reference, crawler rules",
+        ".htaccess": "Security headers, GZIP, caching, redirects, error pages",
+        "favicon.svg": "SVG favicon auto-generated from business name initials",
+        "og-image.jpg": "Open Graph image (1200x630) with brand name + tagline",
+        "logo.png": "Simple text-based logo if user doesn't provide one",
+        "manifest.json": "PWA manifest for mobile add-to-homescreen",
+        "llms.txt": "AI crawler info file with structured business data"
+      }
+    },
+
+    "page_blueprint": {
+      "description": "Exact HTML structure AI will follow for index.html",
+      "head_section": [
+        "charset UTF-8",
+        "viewport meta",
+        "title tag (Primary Keyword | Brand Name) - max 60 chars",
+        "meta description - max 160 chars with CTA",
+        "meta keywords (5-8 relevant keywords)",
+        "meta robots index,follow",
+        "canonical URL",
+        "google-site-verification (if provided)",
+        "favicon links (SVG + PNG + apple-touch-icon)",
+        "OG tags (type, title, description, url, image, site_name, locale)",
+        "Twitter card tags (card, title, description, image)",
+        "preload LCP image",
+        "preconnect to fonts.googleapis.com + gstatic.com + cdnjs.cloudflare.com",
+        "Google Fonts link with display=swap",
+        "Font Awesome CDN link",
+        "main CSS link with version query",
+        "Schema: LocalBusiness/Organization JSON-LD",
+        "Schema: FAQPage JSON-LD",
+        "Schema: BreadcrumbList JSON-LD",
+        "Schema: SpeakableSpecification JSON-LD",
+        "GA4/GTM script (if ID provided)"
+      ],
+      "body_sections": {
+        "cookie_banner": {
+          "elements": ["message", "accept_button", "learn_more_link"],
+          "behavior": "Show after 2s if not accepted. Store in localStorage."
+        },
+        "header": {
+          "elements": ["logo", "nav_links (Home, Services, About, Blog, Contact)", "CTA_button", "mobile_hamburger"],
+          "behavior": "Fixed position, shrink on scroll, mobile responsive"
+        },
+        "hero": {
+          "elements": ["badge/label", "h1_headline", "subtitle_paragraph", "two_cta_buttons", "trust_rating"],
+          "rules": "H1 must contain primary keyword. Subtitle explains value prop. Background image preloaded as WebP."
+        },
+        "stats_bar": {
+          "elements": ["4_stat_items with counter animation"],
+          "rules": "Show real values as default (not 0). JS animates from 0 to target on scroll."
+        },
+        "client_logos": {
+          "elements": ["label_text", "4-6_logo_images"],
+          "rules": "All logos must have descriptive alt text with 'Client' keyword. width/height set."
+        },
+        "services": {
+          "elements": ["section_header (badge + h2 + subtitle)", "3-6_service_cards (icon + h3 + description + link)"],
+          "rules": "Each service links to dedicated service page if it exists."
+        },
+        "projects_portfolio": {
+          "elements": ["section_header", "3_project_cards (status + name + location + stats + tags)"],
+          "rules": "Show real metrics. Live status indicator with pulse animation."
+        },
+        "testimonials": {
+          "elements": ["section_header", "3_testimonial_cards (stars + quote + author_avatar + name + designation)", "google_rating_badge"],
+          "rules": "Use real or realistic testimonials. Include company name."
+        },
+        "case_studies": {
+          "elements": ["section_header", "3_case_cards (icon + title + location + metrics + highlight)"],
+          "rules": "Include specific numbers: leads, conversion rate, revenue, ROI."
+        },
+        "about": {
+          "elements": ["badge + h2", "description", "4_usp_items (icon + title + subtitle)", "cta_button", "team_image", "achievement_badge"],
+          "rules": "Mention years, location, team size. Include image with WebP + JPEG fallback."
+        },
+        "cta_section": {
+          "elements": ["h2_headline", "subtitle", "cta_button"],
+          "rules": "High contrast background. Single clear CTA."
+        },
+        "blog_preview": {
+          "elements": ["section_header", "3_blog_cards (image + category + h3 + excerpt + read_more_link)", "view_all_button"],
+          "rules": "Each card links to individual blog post URL, NOT blog.html."
+        },
+        "faq_section": {
+          "elements": ["section_header", "5-8_accordion_items (question + answer)"],
+          "rules": "Must match FAQPage schema exactly. Include target keywords in questions."
+        },
+        "footer": {
+          "elements": ["logo + about_text + social_icons", "company_links", "service_links", "contact_info (phone + email + address)", "copyright + legal_links"],
+          "rules": "Phone wrapped in tel: link. Email in mailto: link. Copyright shows current year."
+        },
+        "whatsapp_float": {
+          "elements": ["fixed_button with WhatsApp icon + tooltip"],
+          "rules": "Links to wa.me/[number]. Bottom-right position. z-index above all."
+        },
+        "contact_modal": {
+          "elements": ["close_button", "h2", "subtitle", "form (name, phone, email, location, message, submit)"],
+          "rules": "Triggered by all CTA buttons with class 'open-contact-form'. Form submits to query.php or API."
+        },
+        "exit_intent_popup": {
+          "elements": ["close_button", "icon", "headline", "offer_text", "benefit_list", "cta_button", "skip_text"],
+          "rules": "Show once per session. Trigger on mouse exit (desktop) or 30s timeout (mobile)."
+        }
+      }
+    },
+
+    "css_system": {
+      "description": "CSS architecture and design rules",
+      "architecture": {
+        "variables": "All colors, fonts, shadows, transitions, radius in :root CSS variables",
+        "reset": "Universal box-sizing, margin/padding reset",
+        "base": "Body font, line-height, color",
+        "layout": "Container max-width 1200px, 90% width",
+        "components": "Cards, buttons, badges, modals, forms",
+        "animations": "fade-in on scroll (IntersectionObserver), counter, pulse, float",
+        "responsive": "Mobile-first. Breakpoints: 768px (tablet), 1024px (desktop)"
+      },
+      "design_rules": [
+        "Max 2 font families (1 heading + 1 body)",
+        "Max 3 colors (primary + secondary/gold + dark)",
+        "Buttons: min 48px height, 16px+ font, rounded corners",
+        "Cards: box-shadow, border-radius 12px, hover translateY(-5px)",
+        "Sections: alternate between white and light-bg background",
+        "Images: always border-radius, object-fit cover",
+        "Mobile: hamburger menu, single column grids, smaller fonts",
+        "Animations: subtle, 0.3-0.6s duration, ease timing"
+      ]
+    },
+
+    "js_system": {
+      "description": "JavaScript features to include in every website",
+      "features": [
+        "Mobile menu toggle (hamburger ↔ close icon)",
+        "Header shrink on scroll (add 'scrolled' class)",
+        "Scroll fade-in animations (IntersectionObserver, add 'visible' class)",
+        "Counter animation (animate from 0 to data-target on scroll)",
+        "Contact modal (open/close, click outside to close, Escape key)",
+        "Exit intent popup (mouseout top, mobile 30s timeout, session storage)",
+        "Smooth scroll for anchor links (offset by header height)",
+        "Form validation (mobile number 10+ digits, email format)",
+        "Cookie consent (localStorage, show after 2s delay)",
+        "Lazy loading fallback for older browsers"
+      ],
+      "rules": [
+        "All JS in single script.js file",
+        "Use defer attribute on script tag",
+        "No jQuery - vanilla JS only",
+        "Use IntersectionObserver for scroll-based features",
+        "Use event delegation where possible"
+      ]
+    },
+
+    "content_generation": {
+      "description": "How AI generates content for each section",
+      "rules": [
+        "Primary keyword in H1, first 100 words, and 2-3 H2s",
+        "Location name in title, meta description, H1, and about section",
+        "Each section has minimum 50-100 words of meaningful content",
+        "CTAs use benefit-driven language, not generic 'Submit' or 'Click Here'",
+        "Stats use realistic but impressive numbers based on category",
+        "Testimonials use Indian names for Indian businesses, realistic designations",
+        "FAQ answers are 40-80 words each, direct and factual",
+        "Blog posts are 1500+ words with proper heading hierarchy",
+        "Privacy policy and terms are legally accurate for Indian businesses"
+      ],
+      "blog_post_structure": {
+        "total_posts": 4,
+        "per_post": {
+          "word_count": "1500-2000",
+          "headings": "1 H1, 5-8 H2s, 3-5 H3s",
+          "images": "3-4 relevant Unsplash images with alt text",
+          "internal_links": "2-3 links to other pages/posts",
+          "schema": "Article/BlogPosting JSON-LD",
+          "meta": "Unique title (60 chars) + description (160 chars) + OG + Twitter"
+        },
+        "topic_selection": "Based on category target_keywords. Mix of how-to, guide, listicle, case study."
+      }
+    },
+
+    "deployment_workflow": {
+      "description": "Step-by-step deployment process after building",
+      "steps": [
+        "1. Generate all files locally in ~/Desktop/[ProjectName]/ folder",
+        "2. Verify all HTML validates (no unclosed tags, proper nesting)",
+        "3. Connect to hosting via SSH/FTP using provided credentials",
+        "4. Find public_html or web root directory",
+        "5. Backup existing files (if any) to /backup/ folder on server",
+        "6. Upload all files via SCP/FTP",
+        "7. Verify .htaccess is uploaded as hidden file",
+        "8. Test homepage loads correctly via WebFetch",
+        "9. Test all pages load (contact, blog, privacy, terms, 404)",
+        "10. Verify HTTPS redirect works",
+        "11. Verify GZIP compression active",
+        "12. Submit sitemap to Google Search Console (if GSC credentials available)",
+        "13. Request indexing for homepage and key pages",
+        "14. Run full 360 SEO audit checklist against live site",
+        "15. Generate final report for user"
+      ]
+    },
+
+    "post_deployment_seo": {
+      "description": "SEO tasks to run immediately after deployment",
+      "steps": [
+        "Submit sitemap.xml to Google Search Console",
+        "Request indexing for all important pages",
+        "Verify robots.txt is accessible",
+        "Test schema markup on Google Rich Results Test",
+        "Test OG tags on Facebook Sharing Debugger",
+        "Run PageSpeed Insights and note score",
+        "Check mobile-friendly test",
+        "Verify all internal links work (no 404s)",
+        "Test contact form submission",
+        "Verify WhatsApp button works",
+        "Check cookie consent banner",
+        "Test exit intent popup"
+      ]
+    },
+
+    "query_php_template": {
+      "description": "Backend form handler template (PHP for shared hosting)",
+      "features": [
+        "Receive form data (name, mobile, email, location, query)",
+        "Validate and sanitize all inputs",
+        "Send email notification to business owner",
+        "Save lead to CSV file as backup",
+        "Redirect to thankyou.html",
+        "Rate limiting (max 5 submissions per IP per hour)",
+        "CSRF token validation"
+      ]
+    }
+  },
+
+  "1_technical_seo": {
+    "label": "Technical SEO",
+    "description": "Foundation-level technical checks that affect crawling, indexing, and ranking.",
+    "items": {
+      "1_01_https": {
+        "check": "Site uses HTTPS with valid SSL certificate",
+        "priority": "critical",
+        "how_to_fix": "Install SSL via hosting panel or Cloudflare. Add 301 redirect HTTP → HTTPS in .htaccess.",
+        "status": ""
+      },
+      "1_02_www_redirect": {
+        "check": "www and non-www versions redirect to one canonical version (no duplicate)",
+        "priority": "critical",
+        "how_to_fix": "Add RewriteRule in .htaccess to force www → non-www or vice versa.",
+        "status": ""
+      },
+      "1_03_robots_txt": {
+        "check": "robots.txt exists, is accessible, and allows crawling of important pages",
+        "priority": "critical",
+        "how_to_fix": "Create /robots.txt with User-agent: * Allow: / and Sitemap reference.",
+        "status": ""
+      },
+      "1_04_sitemap_xml": {
+        "check": "XML sitemap exists, lists all important pages, submitted to GSC",
+        "priority": "critical",
+        "how_to_fix": "Generate sitemap.xml with all pages, proper lastmod dates, priority, and changefreq. Submit in Google Search Console.",
+        "status": ""
+      },
+      "1_05_sitemap_dates": {
+        "check": "Sitemap lastmod dates are accurate and updated when content changes",
+        "priority": "high",
+        "how_to_fix": "Update lastmod to current date whenever page content is modified.",
+        "status": ""
+      },
+      "1_06_canonical_tags": {
+        "check": "Every page has a correct rel=canonical tag pointing to itself",
+        "priority": "critical",
+        "how_to_fix": "Add <link rel='canonical' href='https://domain.com/page-url'> in <head>.",
+        "status": ""
+      },
+      "1_07_meta_robots": {
+        "check": "All important pages have <meta name='robots' content='index, follow'>",
+        "priority": "high",
+        "how_to_fix": "Add meta robots tag in <head>. Use noindex only for pages you don't want in search.",
+        "status": ""
+      },
+      "1_08_404_page": {
+        "check": "Custom 404 page exists with navigation links back to main pages",
+        "priority": "medium",
+        "how_to_fix": "Create 404.html with helpful links. Add ErrorDocument 404 /404.html in .htaccess.",
+        "status": ""
+      },
+      "1_09_crawl_errors": {
+        "check": "No crawl errors in Google Search Console (404s, 5xx, redirect chains)",
+        "priority": "high",
+        "how_to_fix": "Check GSC Coverage report. Fix broken URLs with 301 redirects or content restoration.",
+        "status": ""
+      },
+      "1_10_page_speed_mobile": {
+        "check": "Mobile page speed score > 80 on PageSpeed Insights",
+        "priority": "high",
+        "how_to_fix": "Optimize images (WebP), enable GZIP, add browser caching, defer JS, reduce CSS.",
+        "status": ""
+      },
+      "1_11_page_speed_desktop": {
+        "check": "Desktop page speed score > 90 on PageSpeed Insights",
+        "priority": "high",
+        "how_to_fix": "Same as mobile + preload critical resources, inline critical CSS.",
+        "status": ""
+      },
+      "1_12_mobile_friendly": {
+        "check": "Site passes Google Mobile-Friendly Test",
+        "priority": "critical",
+        "how_to_fix": "Add viewport meta tag, use responsive CSS, test on mobile devices.",
+        "status": ""
+      },
+      "1_13_viewport_meta": {
+        "check": "<meta name='viewport' content='width=device-width, initial-scale=1.0'> present",
+        "priority": "critical",
+        "how_to_fix": "Add viewport meta tag in <head> of every page.",
+        "status": ""
+      },
+      "1_14_charset": {
+        "check": "<meta charset='UTF-8'> is the first tag in <head>",
+        "priority": "high",
+        "how_to_fix": "Add <meta charset='UTF-8'> as first element inside <head>.",
+        "status": ""
+      },
+      "1_15_lang_attribute": {
+        "check": "<html lang='en'> (or appropriate language) is set",
+        "priority": "medium",
+        "how_to_fix": "Add lang attribute to <html> tag matching page language.",
+        "status": ""
+      },
+      "1_16_hreflang": {
+        "check": "hreflang tags present if site serves multiple languages/regions",
+        "priority": "medium",
+        "how_to_fix": "Add <link rel='alternate' hreflang='xx' href='url'> for each language version.",
+        "status": ""
+      },
+      "1_17_redirect_chains": {
+        "check": "No redirect chains (max 1 redirect hop)",
+        "priority": "high",
+        "how_to_fix": "Update old redirects to point directly to final destination URL.",
+        "status": ""
+      },
+      "1_18_mixed_content": {
+        "check": "No mixed content (HTTP resources on HTTPS pages)",
+        "priority": "critical",
+        "how_to_fix": "Change all http:// resource URLs to https:// or use protocol-relative //.",
+        "status": ""
+      },
+      "1_19_url_structure": {
+        "check": "URLs are clean, lowercase, hyphenated, descriptive (no query strings for main pages)",
+        "priority": "high",
+        "how_to_fix": "Use descriptive slugs: /seo-for-real-estate.html instead of /page?id=123.",
+        "status": ""
+      },
+      "1_20_trailing_slashes": {
+        "check": "Consistent trailing slash usage (either all with or all without)",
+        "priority": "medium",
+        "how_to_fix": "Pick one format and redirect the other via .htaccess.",
+        "status": ""
+      }
+    }
+  },
+
+  "2_on_page_seo": {
+    "label": "On-Page SEO",
+    "description": "Content and HTML-level optimization for each page.",
+    "items": {
+      "2_01_title_tag": {
+        "check": "Every page has a unique, keyword-rich <title> tag (50-60 chars)",
+        "priority": "critical",
+        "how_to_fix": "Write unique title: Primary Keyword | Brand Name. Keep under 60 characters.",
+        "status": ""
+      },
+      "2_02_meta_description": {
+        "check": "Every page has a unique, compelling meta description (120-160 chars)",
+        "priority": "critical",
+        "how_to_fix": "Write action-oriented description with primary keyword and CTA. Under 160 chars.",
+        "status": ""
+      },
+      "2_03_h1_tag": {
+        "check": "Every page has exactly ONE H1 tag containing the primary keyword",
+        "priority": "critical",
+        "how_to_fix": "Ensure single H1 per page. Include target keyword naturally.",
+        "status": ""
+      },
+      "2_04_heading_hierarchy": {
+        "check": "Heading hierarchy is logical: H1 > H2 > H3 (no skipping levels)",
+        "priority": "high",
+        "how_to_fix": "Structure content with proper heading nesting. Don't jump from H1 to H3.",
+        "status": ""
+      },
+      "2_05_keyword_in_first_100_words": {
+        "check": "Primary keyword appears in the first 100 words of body content",
+        "priority": "high",
+        "how_to_fix": "Naturally include target keyword early in the page content.",
+        "status": ""
+      },
+      "2_06_keyword_density": {
+        "check": "Keyword density is 1-2% (not over-optimized, not missing)",
+        "priority": "medium",
+        "how_to_fix": "Use keyword naturally throughout content. Avoid stuffing. Use LSI keywords.",
+        "status": ""
+      },
+      "2_07_image_alt_tags": {
+        "check": "ALL images have descriptive, keyword-relevant alt attributes",
+        "priority": "critical",
+        "how_to_fix": "Add alt='Descriptive text about image' to every <img> tag. Include keywords naturally.",
+        "status": ""
+      },
+      "2_08_image_dimensions": {
+        "check": "All images have explicit width and height attributes (prevents CLS)",
+        "priority": "high",
+        "how_to_fix": "Add width='X' height='Y' to all <img> tags to prevent layout shift.",
+        "status": ""
+      },
+      "2_09_image_format": {
+        "check": "Images use modern formats (WebP) with fallbacks (JPEG/PNG)",
+        "priority": "high",
+        "how_to_fix": "Use <picture> tag with <source srcset='image.webp'> and <img src='image.jpg'> fallback.",
+        "status": ""
+      },
+      "2_10_image_compression": {
+        "check": "Images are compressed (< 100KB for thumbnails, < 300KB for hero images)",
+        "priority": "high",
+        "how_to_fix": "Use tools like TinyPNG, ImageOptim, or squoosh.app to compress images.",
+        "status": ""
+      },
+      "2_11_image_lazy_loading": {
+        "check": "Below-the-fold images have loading='lazy' attribute",
+        "priority": "high",
+        "how_to_fix": "Add loading='lazy' to all images except hero/LCP image.",
+        "status": ""
+      },
+      "2_12_internal_linking": {
+        "check": "Each page has 3-5+ internal links to other relevant pages",
+        "priority": "high",
+        "how_to_fix": "Link to related services, blog posts, and key pages with descriptive anchor text.",
+        "status": ""
+      },
+      "2_13_anchor_text": {
+        "check": "Internal link anchor text is descriptive (not 'click here' or 'read more')",
+        "priority": "medium",
+        "how_to_fix": "Use keyword-rich anchor text: 'SEO for real estate' instead of 'click here'.",
+        "status": ""
+      },
+      "2_14_external_links": {
+        "check": "External links open in new tab (target='_blank') with rel='noopener'",
+        "priority": "medium",
+        "how_to_fix": "Add target='_blank' rel='noopener noreferrer' to external links.",
+        "status": ""
+      },
+      "2_15_broken_links": {
+        "check": "No broken internal or external links (all return 200)",
+        "priority": "high",
+        "how_to_fix": "Use a crawler to find broken links. Fix or redirect them.",
+        "status": ""
+      },
+      "2_16_content_length": {
+        "check": "Main pages have 800+ words. Blog posts have 1500+ words for SEO value",
+        "priority": "medium",
+        "how_to_fix": "Expand thin content with valuable, relevant information. Don't pad with fluff.",
+        "status": ""
+      },
+      "2_17_content_freshness": {
+        "check": "Content is up-to-date (dates, stats, year references are current)",
+        "priority": "high",
+        "how_to_fix": "Update copyright year, statistics, and date references to current year.",
+        "status": ""
+      },
+      "2_18_no_duplicate_content": {
+        "check": "No duplicate content across pages (each page is unique)",
+        "priority": "critical",
+        "how_to_fix": "Ensure each page has unique content. Use canonical tags for similar pages.",
+        "status": ""
+      },
+      "2_19_table_of_contents": {
+        "check": "Long-form content (1500+ words) has a table of contents with jump links",
+        "priority": "medium",
+        "how_to_fix": "Add TOC with anchor links to H2/H3 sections at the top of long articles.",
+        "status": ""
+      },
+      "2_20_favicon": {
+        "check": "Favicon is set (SVG + PNG fallbacks for all devices)",
+        "priority": "medium",
+        "how_to_fix": "Add favicon.svg, favicon-32x32.png, favicon-16x16.png, apple-touch-icon.png.",
+        "status": ""
+      }
+    }
+  },
+
+  "3_structured_data_schema": {
+    "label": "Structured Data / Schema Markup",
+    "description": "Schema.org markup for rich snippets and enhanced SERP visibility.",
+    "items": {
+      "3_01_organization_schema": {
+        "check": "Organization schema with name, url, logo, contactPoint, sameAs (social links)",
+        "priority": "critical",
+        "how_to_fix": "Add Organization JSON-LD in homepage <head> with all business details.",
+        "status": ""
+      },
+      "3_02_local_business_schema": {
+        "check": "LocalBusiness schema with address, phone, email, geo, openingHours, priceRange",
+        "priority": "critical",
+        "how_to_fix": "Add LocalBusiness JSON-LD with complete NAP (Name, Address, Phone) data.",
+        "status": ""
+      },
+      "3_03_breadcrumb_schema": {
+        "check": "BreadcrumbList schema on every page showing navigation path",
+        "priority": "high",
+        "how_to_fix": "Add BreadcrumbList JSON-LD: Home > Section > Current Page.",
+        "status": ""
+      },
+      "3_04_faq_schema": {
+        "check": "FAQPage schema on pages with FAQ content (max 5-10 Q&A)",
+        "priority": "high",
+        "how_to_fix": "Add FAQPage JSON-LD with Question and Answer pairs from page content.",
+        "status": ""
+      },
+      "3_05_article_schema": {
+        "check": "Article/BlogPosting schema on all blog posts with author, datePublished, image",
+        "priority": "high",
+        "how_to_fix": "Add Article JSON-LD with headline, author, datePublished, dateModified, image.",
+        "status": ""
+      },
+      "3_06_product_service_schema": {
+        "check": "Service/Product schema on service pages with description and offers",
+        "priority": "medium",
+        "how_to_fix": "Add Service JSON-LD with name, description, provider, areaServed.",
+        "status": ""
+      },
+      "3_07_aggregate_rating": {
+        "check": "AggregateRating schema with ratingValue and reviewCount (if reviews exist)",
+        "priority": "medium",
+        "how_to_fix": "Add AggregateRating inside LocalBusiness schema with actual review data.",
+        "status": ""
+      },
+      "3_08_review_schema": {
+        "check": "Individual Review schema for testimonials (author, rating, reviewBody)",
+        "priority": "medium",
+        "how_to_fix": "Add Review JSON-LD for each testimonial with author name and rating.",
+        "status": ""
+      },
+      "3_09_contact_page_schema": {
+        "check": "ContactPage schema on contact page",
+        "priority": "medium",
+        "how_to_fix": "Add ContactPage JSON-LD with name, description, url.",
+        "status": ""
+      },
+      "3_10_speakable_schema": {
+        "check": "SpeakableSpecification on key pages for Google Assistant / AI voice search",
+        "priority": "medium",
+        "how_to_fix": "Add WebPage JSON-LD with speakable.cssSelector targeting key content sections.",
+        "status": ""
+      },
+      "3_11_sitelinks_searchbox": {
+        "check": "WebSite schema with SearchAction for sitelinks search box (if applicable)",
+        "priority": "low",
+        "how_to_fix": "Add WebSite JSON-LD with potentialAction SearchAction.",
+        "status": ""
+      },
+      "3_12_schema_validation": {
+        "check": "All schema markup validates without errors on Google Rich Results Test",
+        "priority": "critical",
+        "how_to_fix": "Test at https://search.google.com/test/rich-results. Fix any errors.",
+        "status": ""
+      }
+    }
+  },
+
+  "4_open_graph_social": {
+    "label": "Open Graph & Social Meta Tags",
+    "description": "Meta tags for social sharing (Facebook, Twitter, LinkedIn, WhatsApp).",
+    "items": {
+      "4_01_og_type": {
+        "check": "og:type is set (website for homepage, article for blog posts)",
+        "priority": "high",
+        "how_to_fix": "Add <meta property='og:type' content='website'> or 'article' for blogs.",
+        "status": ""
+      },
+      "4_02_og_title": {
+        "check": "og:title is set on every page (can differ from <title>)",
+        "priority": "high",
+        "how_to_fix": "Add <meta property='og:title' content='Page Title'>.",
+        "status": ""
+      },
+      "4_03_og_description": {
+        "check": "og:description is set on every page",
+        "priority": "high",
+        "how_to_fix": "Add <meta property='og:description' content='Compelling description'>.",
+        "status": ""
+      },
+      "4_04_og_image": {
+        "check": "og:image is set on every page (1200x630px recommended)",
+        "priority": "high",
+        "how_to_fix": "Create og-image.jpg (1200x630px) and add <meta property='og:image' content='url'>.",
+        "status": ""
+      },
+      "4_05_og_url": {
+        "check": "og:url matches canonical URL on every page",
+        "priority": "medium",
+        "how_to_fix": "Add <meta property='og:url' content='canonical-url'>.",
+        "status": ""
+      },
+      "4_06_og_site_name": {
+        "check": "og:site_name is set on homepage",
+        "priority": "medium",
+        "how_to_fix": "Add <meta property='og:site_name' content='Brand Name'>.",
+        "status": ""
+      },
+      "4_07_og_locale": {
+        "check": "og:locale is set (e.g., en_IN, en_US)",
+        "priority": "low",
+        "how_to_fix": "Add <meta property='og:locale' content='en_IN'>.",
+        "status": ""
+      },
+      "4_08_twitter_card": {
+        "check": "twitter:card is set on every page (summary_large_image preferred)",
+        "priority": "high",
+        "how_to_fix": "Add <meta name='twitter:card' content='summary_large_image'>.",
+        "status": ""
+      },
+      "4_09_twitter_title": {
+        "check": "twitter:title and twitter:description set on every page",
+        "priority": "medium",
+        "how_to_fix": "Add twitter:title and twitter:description meta tags.",
+        "status": ""
+      },
+      "4_10_twitter_image": {
+        "check": "twitter:image is set on every page",
+        "priority": "medium",
+        "how_to_fix": "Add <meta name='twitter:image' content='image-url'>.",
+        "status": ""
+      },
+      "4_11_social_preview_test": {
+        "check": "Social sharing preview looks good on Facebook, Twitter, LinkedIn, WhatsApp",
+        "priority": "medium",
+        "how_to_fix": "Test with Facebook Sharing Debugger, Twitter Card Validator, LinkedIn Post Inspector.",
+        "status": ""
+      }
+    }
+  },
+
+  "5_google_search_console": {
+    "label": "Google Search Console",
+    "description": "GSC setup, monitoring, and optimization tasks.",
+    "items": {
+      "5_01_gsc_verified": {
+        "check": "Site is verified in Google Search Console (DNS, HTML tag, or file method)",
+        "priority": "critical",
+        "how_to_fix": "Add google-site-verification meta tag or upload verification file.",
+        "status": ""
+      },
+      "5_02_sitemap_submitted": {
+        "check": "Sitemap.xml is submitted in GSC Sitemaps section",
+        "priority": "critical",
+        "how_to_fix": "GSC > Sitemaps > Add sitemap URL > Submit.",
+        "status": ""
+      },
+      "5_03_indexing_requested": {
+        "check": "All important pages are indexed (URL Inspection > Request Indexing)",
+        "priority": "critical",
+        "how_to_fix": "Use URL Inspection tool for each important page. Click Request Indexing.",
+        "status": ""
+      },
+      "5_04_coverage_errors": {
+        "check": "No coverage errors (Excluded, Error pages in Coverage report)",
+        "priority": "high",
+        "how_to_fix": "Fix 404s, redirect errors, server errors shown in Coverage report.",
+        "status": ""
+      },
+      "5_05_mobile_usability": {
+        "check": "No mobile usability issues in GSC",
+        "priority": "high",
+        "how_to_fix": "Fix text too small, clickable elements too close, content wider than screen.",
+        "status": ""
+      },
+      "5_06_core_web_vitals": {
+        "check": "Core Web Vitals pass in GSC (LCP < 2.5s, FID < 100ms, CLS < 0.1)",
+        "priority": "high",
+        "how_to_fix": "Optimize LCP (preload hero image), FID (defer JS), CLS (set image dimensions).",
+        "status": ""
+      },
+      "5_07_performance_monitoring": {
+        "check": "Monitor clicks, impressions, CTR, position regularly",
+        "priority": "medium",
+        "how_to_fix": "Check GSC Performance report weekly. Track keyword rankings.",
+        "status": ""
+      },
+      "5_08_search_appearance": {
+        "check": "Rich results appearing for pages with schema markup",
+        "priority": "medium",
+        "how_to_fix": "Check Enhancements section in GSC for FAQ, Breadcrumb rich result status.",
+        "status": ""
+      }
+    }
+  },
+
+  "6_google_business_profile": {
+    "label": "Google Business Profile (GMB)",
+    "description": "Local SEO via Google Business Profile optimization.",
+    "items": {
+      "6_01_gbp_claimed": {
+        "check": "Google Business Profile is claimed and verified",
+        "priority": "critical",
+        "how_to_fix": "Go to business.google.com, claim your business, verify via postcard/phone.",
+        "status": ""
+      },
+      "6_02_nap_consistent": {
+        "check": "NAP (Name, Address, Phone) is consistent across website, GBP, and all directories",
+        "priority": "critical",
+        "how_to_fix": "Ensure exact same business name, address, phone on website footer, GBP, and citations.",
+        "status": ""
+      },
+      "6_03_gbp_categories": {
+        "check": "Primary and secondary business categories are set correctly",
+        "priority": "high",
+        "how_to_fix": "Choose most relevant primary category. Add 3-5 secondary categories.",
+        "status": ""
+      },
+      "6_04_gbp_description": {
+        "check": "Business description is keyword-rich and complete (750 chars max)",
+        "priority": "high",
+        "how_to_fix": "Write compelling description with target keywords and service areas.",
+        "status": ""
+      },
+      "6_05_gbp_photos": {
+        "check": "Profile has 10+ quality photos (logo, cover, office, team, work)",
+        "priority": "medium",
+        "how_to_fix": "Upload high-quality photos of office, team, projects, logo.",
+        "status": ""
+      },
+      "6_06_gbp_reviews": {
+        "check": "Business has 10+ reviews with 4.5+ average rating",
+        "priority": "high",
+        "how_to_fix": "Ask satisfied clients to leave Google reviews. Respond to all reviews.",
+        "status": ""
+      },
+      "6_07_gbp_posts": {
+        "check": "Regular GBP posts (weekly updates, offers, events)",
+        "priority": "medium",
+        "how_to_fix": "Post weekly updates about services, offers, or blog content.",
+        "status": ""
+      },
+      "6_08_gbp_services": {
+        "check": "All services are listed with descriptions in GBP",
+        "priority": "medium",
+        "how_to_fix": "Add each service with description and pricing (if applicable).",
+        "status": ""
+      },
+      "6_09_gbp_qna": {
+        "check": "Q&A section has pre-populated questions and answers",
+        "priority": "low",
+        "how_to_fix": "Add common questions and answer them yourself to control the narrative.",
+        "status": ""
+      },
+      "6_10_gbp_website_link": {
+        "check": "Website URL in GBP points to correct homepage with UTM tracking",
+        "priority": "high",
+        "how_to_fix": "Set website URL with UTM: https://domain.com/?utm_source=google&utm_medium=gbp.",
+        "status": ""
+      }
+    }
+  },
+
+  "7_performance_core_web_vitals": {
+    "label": "Performance & Core Web Vitals",
+    "description": "Page speed, load time, and Core Web Vitals optimization.",
+    "items": {
+      "7_01_gzip_compression": {
+        "check": "GZIP/Brotli compression enabled for HTML, CSS, JS, JSON, SVG",
+        "priority": "critical",
+        "how_to_fix": "Add mod_deflate rules in .htaccess for all text-based content types.",
+        "status": ""
+      },
+      "7_02_browser_caching": {
+        "check": "Browser caching headers set (images 1yr, CSS/JS 1mo, HTML 1hr)",
+        "priority": "critical",
+        "how_to_fix": "Add mod_expires rules in .htaccess with appropriate expiry times.",
+        "status": ""
+      },
+      "7_03_cache_control": {
+        "check": "Cache-Control headers set with appropriate max-age values",
+        "priority": "high",
+        "how_to_fix": "Add Cache-Control headers via .htaccess for different file types.",
+        "status": ""
+      },
+      "7_04_lcp_optimization": {
+        "check": "Largest Contentful Paint (LCP) < 2.5 seconds",
+        "priority": "critical",
+        "how_to_fix": "Preload hero image, optimize server response, reduce render-blocking resources.",
+        "status": ""
+      },
+      "7_05_fid_optimization": {
+        "check": "First Input Delay (FID) / INP < 100ms",
+        "priority": "high",
+        "how_to_fix": "Defer non-critical JS, break up long tasks, use web workers.",
+        "status": ""
+      },
+      "7_06_cls_optimization": {
+        "check": "Cumulative Layout Shift (CLS) < 0.1",
+        "priority": "high",
+        "how_to_fix": "Set width/height on images, avoid dynamic content injection above fold.",
+        "status": ""
+      },
+      "7_07_preload_lcp": {
+        "check": "LCP image is preloaded with <link rel='preload'>",
+        "priority": "high",
+        "how_to_fix": "Add <link rel='preload' href='hero.webp' as='image' type='image/webp'> in <head>.",
+        "status": ""
+      },
+      "7_08_preconnect": {
+        "check": "Preconnect to external origins (fonts, CDN, analytics)",
+        "priority": "medium",
+        "how_to_fix": "Add <link rel='preconnect' href='https://fonts.googleapis.com'> for each external origin.",
+        "status": ""
+      },
+      "7_09_defer_js": {
+        "check": "Non-critical JavaScript is deferred or loaded async",
+        "priority": "high",
+        "how_to_fix": "Add defer or async attribute to <script> tags. Move scripts to end of body.",
+        "status": ""
+      },
+      "7_10_critical_css": {
+        "check": "Critical CSS is inlined or loaded first for above-the-fold content",
+        "priority": "medium",
+        "how_to_fix": "Extract critical CSS and inline it in <head>. Load rest async.",
+        "status": ""
+      },
+      "7_11_font_optimization": {
+        "check": "Web fonts use font-display: swap to prevent FOIT",
+        "priority": "medium",
+        "how_to_fix": "Add &display=swap to Google Fonts URL or font-display: swap in @font-face.",
+        "status": ""
+      },
+      "7_12_etag_removal": {
+        "check": "ETags removed to reduce server overhead",
+        "priority": "low",
+        "how_to_fix": "Add 'Header unset ETag' and 'FileETag None' in .htaccess.",
+        "status": ""
+      },
+      "7_13_minification": {
+        "check": "CSS and JS files are minified in production",
+        "priority": "medium",
+        "how_to_fix": "Use tools like cssnano, terser, or online minifiers to minify CSS/JS.",
+        "status": ""
+      },
+      "7_14_cdn_usage": {
+        "check": "Static assets served via CDN (Cloudflare, BunnyCDN, etc.)",
+        "priority": "medium",
+        "how_to_fix": "Set up Cloudflare (free tier) or other CDN for static assets.",
+        "status": ""
+      }
+    }
+  },
+
+  "8_security": {
+    "label": "Security",
+    "description": "Website security headers and best practices.",
+    "items": {
+      "8_01_hsts": {
+        "check": "Strict-Transport-Security (HSTS) header with max-age=31536000",
+        "priority": "critical",
+        "how_to_fix": "Add Header set Strict-Transport-Security 'max-age=31536000; includeSubDomains; preload' in .htaccess.",
+        "status": ""
+      },
+      "8_02_x_content_type": {
+        "check": "X-Content-Type-Options: nosniff header set",
+        "priority": "high",
+        "how_to_fix": "Add Header set X-Content-Type-Options 'nosniff' in .htaccess.",
+        "status": ""
+      },
+      "8_03_x_frame_options": {
+        "check": "X-Frame-Options: SAMEORIGIN header set (prevents clickjacking)",
+        "priority": "high",
+        "how_to_fix": "Add Header set X-Frame-Options 'SAMEORIGIN' in .htaccess.",
+        "status": ""
+      },
+      "8_04_xss_protection": {
+        "check": "X-XSS-Protection: 1; mode=block header set",
+        "priority": "high",
+        "how_to_fix": "Add Header set X-XSS-Protection '1; mode=block' in .htaccess.",
+        "status": ""
+      },
+      "8_05_referrer_policy": {
+        "check": "Referrer-Policy header set (strict-origin-when-cross-origin)",
+        "priority": "medium",
+        "how_to_fix": "Add Header set Referrer-Policy 'strict-origin-when-cross-origin' in .htaccess.",
+        "status": ""
+      },
+      "8_06_permissions_policy": {
+        "check": "Permissions-Policy header set (restrict camera, microphone, geolocation)",
+        "priority": "medium",
+        "how_to_fix": "Add Header set Permissions-Policy 'camera=(), microphone=(), geolocation=()' in .htaccess.",
+        "status": ""
+      },
+      "8_07_csp": {
+        "check": "Content-Security-Policy header (at minimum: upgrade-insecure-requests)",
+        "priority": "medium",
+        "how_to_fix": "Add Header set Content-Security-Policy 'upgrade-insecure-requests' in .htaccess.",
+        "status": ""
+      },
+      "8_08_directory_listing": {
+        "check": "Directory listing disabled (Options -Indexes)",
+        "priority": "critical",
+        "how_to_fix": "Add 'Options -Indexes' in .htaccess.",
+        "status": ""
+      },
+      "8_09_sensitive_files_blocked": {
+        "check": "Sensitive files (.env, .git, .sql, .zip, .bak) are blocked from access",
+        "priority": "critical",
+        "how_to_fix": "Add FilesMatch rules in .htaccess to deny access to sensitive file extensions.",
+        "status": ""
+      },
+      "8_10_email_obfuscation": {
+        "check": "Email addresses are obfuscated (JS-rendered or encoded) to prevent scraping",
+        "priority": "low",
+        "how_to_fix": "Render email via JavaScript or use HTML entity encoding.",
+        "status": ""
+      }
+    }
+  },
+
+  "9_local_seo": {
+    "label": "Local SEO",
+    "description": "Location-based optimization for local search visibility.",
+    "items": {
+      "9_01_local_keywords": {
+        "check": "Location-specific keywords in title, meta description, H1, content",
+        "priority": "high",
+        "how_to_fix": "Include city/region names naturally: 'Real Estate Marketing Agency in Delhi NCR'.",
+        "status": ""
+      },
+      "9_02_nap_on_website": {
+        "check": "NAP (Name, Address, Phone) visible on every page (footer)",
+        "priority": "critical",
+        "how_to_fix": "Add business name, address, phone in footer of every page.",
+        "status": ""
+      },
+      "9_03_google_maps_embed": {
+        "check": "Google Maps embed on contact page showing business location",
+        "priority": "medium",
+        "how_to_fix": "Embed Google Maps iframe on contact page with business location.",
+        "status": ""
+      },
+      "9_04_local_citations": {
+        "check": "Business listed on JustDial, Sulekha, IndiaMART, Yellow Pages (if applicable)",
+        "priority": "medium",
+        "how_to_fix": "Submit business to relevant local directories with consistent NAP.",
+        "status": ""
+      },
+      "9_05_geo_coordinates": {
+        "check": "Geo coordinates in LocalBusiness schema match actual location",
+        "priority": "medium",
+        "how_to_fix": "Add correct latitude/longitude in LocalBusiness schema geo property.",
+        "status": ""
+      },
+      "9_06_service_area": {
+        "check": "Service area defined in schema and content",
+        "priority": "medium",
+        "how_to_fix": "Add areaServed property in schema. Mention service areas in content.",
+        "status": ""
+      }
+    }
+  },
+
+  "10_content_strategy": {
+    "label": "Content Strategy & Blog SEO",
+    "description": "Content marketing and blog optimization for organic traffic growth.",
+    "items": {
+      "10_01_blog_exists": {
+        "check": "Blog/insights section exists with regular content (at least 4 posts)",
+        "priority": "high",
+        "how_to_fix": "Create blog section with keyword-targeted articles. Publish 2-4 per month.",
+        "status": ""
+      },
+      "10_02_blog_seo": {
+        "check": "Each blog post has unique title, meta description, OG tags, Article schema",
+        "priority": "high",
+        "how_to_fix": "Optimize each post: title tag, meta desc, H1, OG image, Article JSON-LD.",
+        "status": ""
+      },
+      "10_03_blog_internal_links": {
+        "check": "Blog posts interlink with each other and with service pages",
+        "priority": "high",
+        "how_to_fix": "Add 2-3 internal links per blog post to related posts and service pages.",
+        "status": ""
+      },
+      "10_04_blog_categories": {
+        "check": "Blog posts are organized by categories/topics",
+        "priority": "medium",
+        "how_to_fix": "Create category pages or tag system for blog organization.",
+        "status": ""
+      },
+      "10_05_evergreen_content": {
+        "check": "Mix of evergreen (timeless) and trending (timely) content",
+        "priority": "medium",
+        "how_to_fix": "Create pillar content (guides, how-tos) alongside news and updates.",
+        "status": ""
+      },
+      "10_06_content_calendar": {
+        "check": "Content calendar exists with planned topics for next 3 months",
+        "priority": "medium",
+        "how_to_fix": "Plan topics based on keyword research. Schedule 2-4 posts per month.",
+        "status": ""
+      },
+      "10_07_featured_snippets": {
+        "check": "Content formatted to win featured snippets (lists, tables, definitions, how-tos)",
+        "priority": "medium",
+        "how_to_fix": "Use numbered lists, tables, Q&A format, and direct answer paragraphs.",
+        "status": ""
+      }
+    }
+  },
+
+  "11_ux_cro": {
+    "label": "UX & Conversion Rate Optimization (CRO)",
+    "description": "User experience and conversion optimization checks.",
+    "items": {
+      "11_01_cta_visibility": {
+        "check": "Clear CTAs above the fold on every page (button, form, or link)",
+        "priority": "critical",
+        "how_to_fix": "Place primary CTA button in hero section. Use contrasting colors.",
+        "status": ""
+      },
+      "11_02_cta_text": {
+        "check": "CTA text is action-oriented ('Get Free Audit' not 'Submit')",
+        "priority": "high",
+        "how_to_fix": "Use benefit-driven CTA text: 'Start Generating Leads', 'Get Free Quote'.",
+        "status": ""
+      },
+      "11_03_contact_form": {
+        "check": "Contact form has minimal fields (name, phone, email minimum)",
+        "priority": "high",
+        "how_to_fix": "Keep forms short: 3-5 fields max. More fields = lower conversion.",
+        "status": ""
+      },
+      "11_04_phone_clickable": {
+        "check": "Phone numbers are clickable (tel: link) on mobile",
+        "priority": "high",
+        "how_to_fix": "Wrap phone in <a href='tel:+91XXXXXXXXXX'>number</a>.",
+        "status": ""
+      },
+      "11_05_whatsapp_button": {
+        "check": "WhatsApp floating button present for instant contact",
+        "priority": "medium",
+        "how_to_fix": "Add fixed-position WhatsApp button linking to wa.me/number.",
+        "status": ""
+      },
+      "11_06_trust_signals": {
+        "check": "Trust signals visible (reviews, ratings, client logos, certifications)",
+        "priority": "high",
+        "how_to_fix": "Add Google rating, client logos, testimonials, case study numbers.",
+        "status": ""
+      },
+      "11_07_social_proof": {
+        "check": "Testimonials/reviews with real names and company names",
+        "priority": "high",
+        "how_to_fix": "Add 3+ testimonials with full name, designation, company, and photo/initials.",
+        "status": ""
+      },
+      "11_08_exit_intent": {
+        "check": "Exit intent popup with lead magnet (free audit, guide, consultation)",
+        "priority": "medium",
+        "how_to_fix": "Add JS-triggered popup on mouse exit with compelling offer.",
+        "status": ""
+      },
+      "11_09_cookie_consent": {
+        "check": "Cookie consent banner present and functional",
+        "priority": "medium",
+        "how_to_fix": "Add cookie banner with Accept button and link to privacy policy.",
+        "status": ""
+      },
+      "11_10_navigation": {
+        "check": "Navigation is clear, consistent, and accessible on all pages",
+        "priority": "critical",
+        "how_to_fix": "Use consistent nav across all pages. Highlight current page. Mobile hamburger menu.",
+        "status": ""
+      },
+      "11_11_mobile_ux": {
+        "check": "Touch targets are 48px+ on mobile. No horizontal scroll.",
+        "priority": "high",
+        "how_to_fix": "Ensure buttons are 48x48px minimum. Test on real mobile devices.",
+        "status": ""
+      },
+      "11_12_thank_you_page": {
+        "check": "Form submission redirects to thank-you page (for conversion tracking)",
+        "priority": "high",
+        "how_to_fix": "Create thankyou.html page. Redirect form submission to it for GA conversion tracking.",
+        "status": ""
+      },
+      "11_13_above_fold_content": {
+        "check": "Above-the-fold content communicates value proposition clearly within 3 seconds",
+        "priority": "critical",
+        "how_to_fix": "Hero section should have: clear headline, sub-headline, CTA, and trust signal.",
+        "status": ""
+      }
+    }
+  },
+
+  "12_analytics_tracking": {
+    "label": "Analytics & Tracking",
+    "description": "Analytics setup for data-driven decision making.",
+    "items": {
+      "12_01_ga4_installed": {
+        "check": "Google Analytics 4 (GA4) is installed and tracking",
+        "priority": "critical",
+        "how_to_fix": "Create GA4 property. Add gtag.js or GTM container to all pages.",
+        "status": ""
+      },
+      "12_02_gtm_installed": {
+        "check": "Google Tag Manager is installed for easy tag management",
+        "priority": "high",
+        "how_to_fix": "Create GTM container. Add GTM snippet to <head> and <body> of all pages.",
+        "status": ""
+      },
+      "12_03_conversion_tracking": {
+        "check": "Form submissions tracked as conversions in GA4",
+        "priority": "critical",
+        "how_to_fix": "Set up conversion event in GA4 for form submit or thank-you page visit.",
+        "status": ""
+      },
+      "12_04_phone_call_tracking": {
+        "check": "Phone call clicks tracked as events",
+        "priority": "high",
+        "how_to_fix": "Add GA4 event tracking on tel: link clicks via GTM or gtag.",
+        "status": ""
+      },
+      "12_05_whatsapp_tracking": {
+        "check": "WhatsApp button clicks tracked as events",
+        "priority": "medium",
+        "how_to_fix": "Add click event tracking on WhatsApp button via GTM.",
+        "status": ""
+      },
+      "12_06_facebook_pixel": {
+        "check": "Facebook/Meta Pixel installed for retargeting (if running Meta ads)",
+        "priority": "medium",
+        "how_to_fix": "Install Meta Pixel base code. Set up Lead, Contact, PageView events.",
+        "status": ""
+      },
+      "12_07_google_ads_tag": {
+        "check": "Google Ads conversion tag installed (if running Google Ads)",
+        "priority": "medium",
+        "how_to_fix": "Add Google Ads global site tag and conversion tracking on thank-you page.",
+        "status": ""
+      },
+      "12_08_utm_parameters": {
+        "check": "All external links (ads, social, email) use UTM parameters for tracking",
+        "priority": "medium",
+        "how_to_fix": "Use Google Campaign URL Builder to create UTM-tagged URLs for all campaigns.",
+        "status": ""
+      }
+    }
+  },
+
+  "13_aeo_ai_readiness": {
+    "label": "Answer Engine Optimization (AEO) & AI Readiness",
+    "description": "Optimization for AI answer engines (ChatGPT, Google SGE/AI Overviews, Perplexity).",
+    "items": {
+      "13_01_question_format_content": {
+        "check": "Content uses question-answer format (What, How, Why, When) for AI extraction",
+        "priority": "high",
+        "how_to_fix": "Structure content as Q&A. Use H2/H3 as questions, answer in following paragraph.",
+        "status": ""
+      },
+      "13_02_concise_answers": {
+        "check": "Direct, concise answers (40-60 words) after each question heading",
+        "priority": "high",
+        "how_to_fix": "Start answer paragraphs with direct, factual answers. Follow with elaboration.",
+        "status": ""
+      },
+      "13_03_entity_clarity": {
+        "check": "Brand/business is clearly defined as an entity (who, what, where, since when)",
+        "priority": "high",
+        "how_to_fix": "State clearly: 'LeadHorizon is a real estate digital marketing agency in Delhi NCR founded in XXXX.'",
+        "status": ""
+      },
+      "13_04_data_citations": {
+        "check": "Content includes specific numbers, stats, and data points (AI loves citing these)",
+        "priority": "medium",
+        "how_to_fix": "Add specific metrics: '250+ projects', '80% lead qualification rate', exact numbers.",
+        "status": ""
+      },
+      "13_05_topical_authority": {
+        "check": "Site has 5+ pages covering related subtopics (topical cluster for authority)",
+        "priority": "high",
+        "how_to_fix": "Create pillar page + 5-10 supporting pages on subtopics within your niche.",
+        "status": ""
+      },
+      "13_06_about_page": {
+        "check": "Detailed About page exists with team info, history, credentials (E-E-A-T)",
+        "priority": "high",
+        "how_to_fix": "Create About page with founder info, company history, credentials, awards.",
+        "status": ""
+      },
+      "13_07_author_profiles": {
+        "check": "Blog posts have author names with bio (for E-E-A-T signals)",
+        "priority": "medium",
+        "how_to_fix": "Add author name, photo, bio, and expertise to each blog post.",
+        "status": ""
+      },
+      "13_08_llms_txt": {
+        "check": "llms.txt file exists (optional, emerging standard for AI crawlers)",
+        "priority": "low",
+        "how_to_fix": "Create /llms.txt with structured business info for AI agents to reference.",
+        "status": ""
+      }
+    }
+  },
+
+  "14_off_page_seo": {
+    "label": "Off-Page SEO & Link Building",
+    "description": "External signals: backlinks, citations, social presence.",
+    "items": {
+      "14_01_backlink_profile": {
+        "check": "Site has quality backlinks from relevant, authoritative domains",
+        "priority": "high",
+        "how_to_fix": "Guest posting, PR, directory submissions, partnerships for quality backlinks.",
+        "status": ""
+      },
+      "14_02_social_profiles": {
+        "check": "Active social media profiles linked from website (Facebook, Instagram, LinkedIn, Twitter)",
+        "priority": "high",
+        "how_to_fix": "Create/optimize social profiles. Add links in footer and schema sameAs.",
+        "status": ""
+      },
+      "14_03_directory_listings": {
+        "check": "Business listed on relevant industry directories with consistent NAP",
+        "priority": "medium",
+        "how_to_fix": "Submit to industry-specific directories, local business directories.",
+        "status": ""
+      },
+      "14_04_brand_mentions": {
+        "check": "Brand is mentioned on external websites (even without links)",
+        "priority": "medium",
+        "how_to_fix": "PR outreach, guest articles, industry publications for brand mentions.",
+        "status": ""
+      },
+      "14_05_competitor_backlinks": {
+        "check": "Analyzed competitor backlink profiles for link opportunities",
+        "priority": "medium",
+        "how_to_fix": "Use Ahrefs/SEMrush to find competitor backlinks. Target same sources.",
+        "status": ""
+      }
+    }
+  },
+
+  "15_accessibility": {
+    "label": "Accessibility (a11y)",
+    "description": "Web accessibility checks for WCAG compliance and SEO benefit.",
+    "items": {
+      "15_01_aria_labels": {
+        "check": "Interactive elements (buttons, links, icons) have aria-labels",
+        "priority": "high",
+        "how_to_fix": "Add aria-label='Menu' to icon buttons, aria-label='Facebook' to social icons.",
+        "status": ""
+      },
+      "15_02_color_contrast": {
+        "check": "Text has sufficient color contrast (WCAG AA: 4.5:1 for body text)",
+        "priority": "medium",
+        "how_to_fix": "Check with WebAIM Contrast Checker. Adjust text/background colors.",
+        "status": ""
+      },
+      "15_03_keyboard_navigation": {
+        "check": "Site is fully navigable via keyboard (Tab, Enter, Escape)",
+        "priority": "medium",
+        "how_to_fix": "Ensure focus styles visible, modal traps focus, all interactive elements focusable.",
+        "status": ""
+      },
+      "15_04_form_labels": {
+        "check": "All form inputs have associated <label> elements",
+        "priority": "high",
+        "how_to_fix": "Add <label for='fieldId'> for every input, or use aria-label.",
+        "status": ""
+      },
+      "15_05_skip_navigation": {
+        "check": "Skip to main content link exists for screen readers",
+        "priority": "low",
+        "how_to_fix": "Add hidden 'Skip to main content' link at top of page.",
+        "status": ""
+      },
+      "15_06_semantic_html": {
+        "check": "Uses semantic HTML5 elements (header, nav, main, section, article, footer)",
+        "priority": "medium",
+        "how_to_fix": "Replace generic divs with semantic elements where appropriate.",
+        "status": ""
+      }
+    }
+  },
+
+  "16_legal_compliance": {
+    "label": "Legal & Compliance",
+    "description": "Legal pages and compliance requirements.",
+    "items": {
+      "16_01_privacy_policy": {
+        "check": "Privacy Policy page exists with data collection and usage details",
+        "priority": "critical",
+        "how_to_fix": "Create privacy-policy.html covering data collection, cookies, third-party sharing.",
+        "status": ""
+      },
+      "16_02_terms_of_service": {
+        "check": "Terms of Service page exists",
+        "priority": "high",
+        "how_to_fix": "Create terms.html with usage terms, disclaimers, liability limitations.",
+        "status": ""
+      },
+      "16_03_cookie_policy": {
+        "check": "Cookie policy disclosed (can be part of privacy policy)",
+        "priority": "medium",
+        "how_to_fix": "Add cookie usage section in privacy policy or create separate cookie-policy.html.",
+        "status": ""
+      },
+      "16_04_copyright_notice": {
+        "check": "Copyright notice in footer with current year",
+        "priority": "medium",
+        "how_to_fix": "Add © [Current Year] Brand Name in footer. Update annually.",
+        "status": ""
+      },
+      "16_05_gdpr_compliance": {
+        "check": "GDPR/data protection compliance if serving EU users",
+        "priority": "medium",
+        "how_to_fix": "Add consent mechanism for cookies, data processing disclosure.",
+        "status": ""
+      }
+    }
+  },
+
+  "execution_instructions": {
+    "label": "How to Use This Checklist with AI",
+    "description": "Instructions for AI agents to execute this checklist on any website URL.",
+    "steps": [
+      "1. User provides a website URL.",
+      "2. AI fetches the URL and all linked pages (homepage, about, services, blog, contact, privacy, terms).",
+      "3. AI reads robots.txt, sitemap.xml from the domain.",
+      "4. AI checks each item in this checklist against the fetched content.",
+      "5. AI sets status for each item: done, missing, partial, over_optimized, or not_applicable.",
+      "6. AI generates a prioritized fix list (critical first, then high, medium, low).",
+      "7. AI auto-fixes what it can (HTML edits, schema additions, meta tags, htaccess).",
+      "8. AI generates report with before/after comparison.",
+      "9. AI uploads fixed files to server if access is available.",
+      "10. AI re-submits sitemap and requests indexing via GSC API if connected."
+    ],
+    "auto_fixable_items": [
+      "Meta tags (title, description, robots, canonical)",
+      "Open Graph and Twitter Card tags",
+      "Schema markup (all types)",
+      "Image alt tags and dimensions",
+      "Copyright year updates",
+      "Sitemap.xml generation and date updates",
+      ".htaccess (GZIP, caching, security headers, redirects)",
+      "Internal link fixes",
+      "Breadcrumb schema",
+      "SpeakableSpecification schema",
+      "robots.txt creation",
+      "Blog post SEO optimization"
+    ],
+    "requires_manual_action": [
+      "Google Business Profile setup",
+      "Google Analytics / GTM installation",
+      "Backlink building",
+      "Content writing (new blog posts)",
+      "Social media profile creation",
+      "SSL certificate installation",
+      "Directory submissions",
+      "Google Ads / Facebook Pixel setup",
+      "Review generation from clients"
+    ]
+  }
+}
